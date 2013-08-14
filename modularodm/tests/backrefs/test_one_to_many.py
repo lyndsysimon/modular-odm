@@ -94,3 +94,14 @@ class OneToManyFieldTestCase(PickleStorageTestCase):
             first_bar.my_foo,
             {'foo': {'my_bar': []}}
         )
+
+    def test_backref_list_assignment_over_empty_list(self):
+        """ If you assign the list of backrefs directly, what happens? """
+
+        # create a new object with no elements in my_bar
+        test_foo = self.Foo(id=4)
+        test_foo.save()
+
+        test_foo.my_bar = [self.bar, self.baz]
+
+        test_foo.save()
